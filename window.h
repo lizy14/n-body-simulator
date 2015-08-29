@@ -2,7 +2,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "helper.h"
+#include "renderer.h"
 
 #include <QWidget>
 
