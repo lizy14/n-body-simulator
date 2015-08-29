@@ -11,14 +11,14 @@ Widget::Widget(Renderer *helper, QWidget *parent)
 
 {
     this->setMouseTracking(true);
-    QTimer *timer = new QTimer(this);
+    timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
     bodies = new Bodies(3);
     timer->start(10);
 }
 Widget::~Widget(){
     delete bodies;
-
+    delete timer;
 }
 
 void Widget::animate()

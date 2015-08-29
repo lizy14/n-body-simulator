@@ -30,6 +30,7 @@ protected:
 private:
     Renderer *helper;
     Bodies *bodies;
+    QTimer *timer;
 };
 
 
