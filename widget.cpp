@@ -32,7 +32,7 @@ void Widget::paintEvent(QPaintEvent *event)
     helper->paint(this, bodies, event);
 }
 void Widget::mouseMoveEvent(QMouseEvent *ev){
-    double zoom = helper->transform.determinant();
+    double zoom = sqrt(helper->transform.determinant());
     if(ev->buttons()==Qt::LeftButton){
         helper->transform.translate((ev->x()-lastMouseX)/zoom, (ev->y()-lastMouseY)/zoom);
     }
