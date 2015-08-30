@@ -2,13 +2,13 @@
 #define BODIES_H
 
 #include <QPointF>
-#include <QVector>
+#include <QList>
 class Body
 {
 public:
     double mass;
     QPointF position, velocity, acceleration;
-    QVector<QPointF> orbit;
+    QList<QPointF> orbit;
     Body():mass(1){}
 };
 
@@ -17,12 +17,15 @@ class Bodies
 private:
     const static double G;
     const static double k;
-    static double deltaT;
+    const static double Pi;
+public:
+    double deltaT;
+    int maxPointsInOrbit;
 public:
     int nBodies;
 
 public:
-    Bodies(int nBodies_);
+    Bodies(int nBodies_, double initialVelocity_ = -1, double deltaT_ = .5, int maxPointsInOrbit_=10000);
     Bodies(){}
     ~Bodies();
     Body* bodies;

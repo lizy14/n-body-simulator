@@ -8,7 +8,7 @@
 
 Window::Window()
 {
-    setWindowTitle("GravitySimulator");
+    setWindowTitle("N-body Problem Simulator");
     resize(618, 618);
 
     Widget *widget = new Widget(&renderer, this);

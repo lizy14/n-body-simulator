@@ -14,12 +14,11 @@ public:
     Renderer();
 
 public:
-    void paint(QWidget *widget, Bodies* bodies, QPaintEvent *event);
+    void paint(QWidget *widget, Bodies* bodies, QPaintEvent *event, bool drawV=false, bool drawA=false);
 public:
     QTransform transform;
 private:
     QBrush background;
-    QBrush circleBrush;
     QFont textFont;
     QPen circlePen;
     QPen textPen;
