@@ -9,7 +9,6 @@
 Widget::Widget(Renderer *helper, QWidget *parent)
     : QWidget(parent), renderer(helper),
       bodies(nullptr), timer(nullptr),
-      isAnimationOngoing(false),
       drawA(false),drawV(false)
 
 {
@@ -30,20 +29,17 @@ Widget::~Widget(){
 }
 void Widget::startAnimation(){
     timer->start(10);
-    isAnimationOngoing=true;
     repaint();
 }
 void Widget::stopAnimation(){
     timer->stop();
-    isAnimationOngoing=false;
     repaint();
 }
 void Widget::toggleAnimation(){
-    if(isAnimationOngoing)
+    if(timer->isActive())
         stopAnimation();
     else
         startAnimation();
-    repaint();
 }
 
 void Widget::animate()
@@ -61,7 +57,7 @@ void Widget::mousePressEvent(QMouseEvent *ev){
     lastMouseY = ev->y();
 }
 void Widget::mouseMoveEvent(QMouseEvent *ev){
-    if(!isAnimationOngoing){
+    if(!timer->isActive()){
         //TODO: handle vector dragging
     }
     double zoom = sqrt(renderer->transform.determinant());

@@ -20,7 +20,6 @@ public:
 
 private:
     int lastMouseX, lastMouseY;
-    bool isAnimationOngoing;
 public slots:
     void animate();
 protected:
