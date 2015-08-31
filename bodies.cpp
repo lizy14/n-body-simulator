@@ -28,8 +28,6 @@ Bodies::Bodies(int nBodies_, double initialVelocity_, double deltaT_, int maxPoi
                     -sin_*initialVelocity_
                     );
     }
-    bodies[0].velocity *=2;
-    bodies[0].mass /=2;
     return;
 }
 

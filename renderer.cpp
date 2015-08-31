@@ -10,7 +10,7 @@
 
 Renderer::Renderer()
 {
-    transform.translate(300,300);
+    resetTransform();
     background = QBrush(QColor(0, 7, 24));
     circlePen = QPen(Qt::black);
     circlePen.setWidth(1);
@@ -18,7 +18,10 @@ Renderer::Renderer()
     textFont.setPixelSize(50);
 }
 
-
+void Renderer::resetTransform(){
+    transform.reset();
+    transform.translate(300,300);
+}
 
 void Renderer::paint(QWidget *widget, Bodies *bodies, QPaintEvent *event, bool drawV, bool drawA)
 {

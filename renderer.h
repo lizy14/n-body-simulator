@@ -17,6 +17,7 @@ public:
     void paint(QWidget *widget, Bodies* bodies, QPaintEvent *event, bool drawV=false, bool drawA=false);
 public:
     QTransform transform;
+    void resetTransform();
 private:
     QBrush background;
     QFont textFont;

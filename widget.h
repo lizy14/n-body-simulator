@@ -22,6 +22,9 @@ private:
     int lastMouseX, lastMouseY;
 public slots:
     void animate();
+    void on_nbodies_change(int);
+    void on_initialvelocity_change(int);
+    void on_deltat_change(int);
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent *ev);
@@ -29,6 +32,11 @@ protected:
     void mousePressEvent(QMouseEvent *ev);
     bool event(QEvent *event);
 
+private:
+    double deltaT;
+    int maxPointsInOrbit;
+    int nBodies;
+    double initialVelocity;
 private:
     bool drawA, drawV;
     Renderer *renderer;
