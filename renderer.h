@@ -23,6 +23,12 @@ private:
     QFont textFont;
     QPen circlePen;
     QPen textPen;
+    QPen velocityPen;
+    QPen accelerationPen;
+    QPen orbitPen;
+private:
+    void drawArrow(QPainter *painter, QPointF startingPoint, QPointF vector,
+                   double arrowLength = 10/*pixels*/, double deltaRadian = 0.523599/*= 30 degrees*/);
 };
 
 

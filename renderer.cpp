@@ -16,11 +16,32 @@ Renderer::Renderer()
     circlePen.setWidth(1);
     textPen = QPen(Qt::white);
     textFont.setPixelSize(50);
+    velocityPen = QPen(Qt::PenStyle::DashLine);
+    accelerationPen = QPen(Qt::PenStyle::DotLine);
+    orbitPen = QPen(Qt::PenStyle::SolidLine);
 }
 
 void Renderer::resetTransform(){
     transform.reset();
     transform.translate(300,300);
+}
+void Renderer::drawArrow(QPainter *painter, QPointF startingPoint, QPointF vector,
+                         double arrowLength, double deltaRadian){
+    if(!vector.x() || !vector.y())return;
+    painter->save();
+    double k = vector.y()/vector.x();
+    QPointF endingPoint = startingPoint+vector;
+    painter->drawLine(startingPoint, endingPoint);
+    if(vector.x()>0)
+        arrowLength *= -1;
+    double alphaL = (atan(k)+deltaRadian);
+    double alphaR = (atan(k)-deltaRadian);
+    QPen pen = painter->pen();
+    pen.setStyle(Qt::SolidLine);
+    painter->setPen(pen);
+    painter->drawLine(endingPoint, endingPoint + arrowLength * QPointF(cos(alphaL),sin(alphaL)));
+    painter->drawLine(endingPoint, endingPoint + arrowLength * QPointF(cos(alphaR),sin(alphaR)));
+    painter->restore();
 }
 
 void Renderer::paint(QWidget *widget, Bodies *bodies, QPaintEvent *event, bool drawV, bool drawA)
@@ -33,16 +54,24 @@ void Renderer::paint(QWidget *widget, Bodies *bodies, QPaintEvent *event, bool d
     QColor color;
     for(int i=0; i<bodies->nBodies; i++){
         color.setHsv((i * 360 / bodies->nBodies) % 360, 255,255);
-
-        painter->setPen(color);
+        orbitPen.setColor(color);
+        painter->setPen(orbitPen);
         painter->drawPolyline(bodies->bodies[i].orbit.toVector());
+
+        painter->setPen(circlePen);
         painter->setBrush(color);
         painter->drawEllipse(bodies->bodies[i].position,10,10);
+
+
         if(drawV){
-            painter->drawLine(bodies->bodies[i].position,bodies->bodies[i].position+10*bodies->bodies[i].velocity);
+            velocityPen.setColor(color);
+            painter->setPen(velocityPen);
+            drawArrow(painter, bodies->bodies[i].position,10*bodies->bodies[i].velocity);
         }
         if(drawA){
-            painter->drawLine(bodies->bodies[i].position,bodies->bodies[i].position+100*bodies->bodies[i].acceleration);
+            accelerationPen.setColor(color.darker(150));
+            painter->setPen(accelerationPen);
+            drawArrow(painter, bodies->bodies[i].position,100*bodies->bodies[i].acceleration);
         }
 
     }
