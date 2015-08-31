@@ -12,7 +12,7 @@
 Widget::Widget(Renderer *helper, QWidget *parent)
     : QWidget(parent), renderer(helper),
       bodies(nullptr), timer(nullptr),
-      drawA(false),drawV(false),
+      drawA(true),drawV(true),
       nBodies(3),initialVelocity(5),deltaT(.1)
 
 {

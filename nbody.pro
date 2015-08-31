@@ -1,4 +1,4 @@
-QT          += opengl widgets
+QT          += widgets
 
 HEADERS     = bodies.h\
               widget.h \
@@ -10,6 +10,3 @@ SOURCES     = bodies.cpp\
               window.cpp \
               renderer.cpp
 
-# install
-target.path = $$[QT_INSTALL_EXAMPLES]/opengl/2dpainting
-INSTALLS += target
