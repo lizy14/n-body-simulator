@@ -88,7 +88,7 @@ Widget::~Widget(){
     delete timer;
 }
 void Widget::startAnimation(){
-    timer->start(100*deltaT);
+    timer->start(1);
     update();
 }
 void Widget::stopAnimation(){
