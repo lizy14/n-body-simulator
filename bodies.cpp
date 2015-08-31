@@ -11,7 +11,8 @@ Bodies::Bodies(int nBodies_, double initialVelocity_, double deltaT_, int maxPoi
     :
       nBodies(nBodies_),
       deltaT(deltaT_),
-      maxPointsInOrbit(maxPointsInOrbit_)
+      maxPointsInOrbit(maxPointsInOrbit_),
+      nPointsInOrbit(0),retry(true)
 {
     bodies = new Body[nBodies];
     if(initialVelocity_<0)
@@ -36,7 +37,6 @@ Bodies::Bodies(int nBodies_, double initialVelocity_, double deltaT_, int maxPoi
 QPointF Bodies::gravity(int idA, int idB){
     if(idA==idB) throw("gravity calculation error");
     QPointF dx = bodies[idA].position - bodies[idB].position;
-    static int retry = true;
     double r_squared = dx.x() * dx.x() + dx.y() * dx.y();
 
     if(r_squared<100 && retry){
@@ -67,7 +67,7 @@ void Bodies::advance(){
         }
     }
 
-    static int nPointsInOrbit=0;
+
 
     bool newPoint=maxPointsInOrbit<0 || nPointsInOrbit<maxPointsInOrbit;
     if(newPoint)

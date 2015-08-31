@@ -23,6 +23,9 @@ public:
     int maxPointsInOrbit;
 public:
     int nBodies;
+private:
+    int nPointsInOrbit;
+    bool retry;
 
 public:
     Bodies(int nBodies_, double initialVelocity_ = -1, double deltaT_ = .5, int maxPointsInOrbit_=10000);
